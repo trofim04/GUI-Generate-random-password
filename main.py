@@ -76,10 +76,13 @@ class App(ctk.CTk):
         """Saving passwords in file named 'passwords.txt'"""
         with open("passwords.txt", "a+") as f:
             data = f.read()
-            if self.newPassword in data:
+            try:
+                if self.newPassword in data:
+                    pass
+                else:
+                    f.write(f"{self.newPassword}\n")
+            except AttributeError:
                 pass
-            else:
-                f.write(f"- {self.newPassword}\n")
 
     def openFile(self):
         try:
@@ -89,9 +92,6 @@ class App(ctk.CTk):
 
 
         
-
-
-
 
 if __name__ == "__main__":
     app = App(windowWidth=325, windowHeight=400)
